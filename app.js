@@ -9,6 +9,7 @@ mongoose.connect('mongodb://localhost/chandu', function (err) {
   if (err) console.error('There was an error connecting to mongodb!');
   else console.log('Successfully connected to mongodb!');
 });
+var endpoint = require('./modules/endpoint-generate');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -29,6 +30,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/', endpoint.generateEndPoint('customer', {
+  name: String,
+  email: String,
+  credit_card: Number,
+  city: String
+}));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
