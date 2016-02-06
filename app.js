@@ -4,6 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/chandu', function (err) {
+  if (err) console.error('There was an error connecting to mongodb!');
+  else console.log('Successfully connected to mongodb!');
+});
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
